@@ -28,6 +28,7 @@ const startApolloServer = async () => {
     app.get('*', (req, res) => { // Any routes are redirected to the index.html. This is because react is a Single Page Application and doesn't need different html files.
       res.sendFile(path.join(__dirname, '../client/dist/index.html'))
     })
+    console.log("production")
   }
 
   db.once('open', () => {
