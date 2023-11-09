@@ -1,5 +1,4 @@
 const { User } = require("../models/User")
-const mongoose = require("mongoose")
 const { signToken, AuthenticationError } = require('../utils/auth')
 
 const resolvers = {
@@ -26,6 +25,7 @@ const resolvers = {
       return auth
     },
     addUser: async (parent, {username, email, password}) => {
+      console.log("Adding user")
       // Create new user
       const newUser = await User.create({username, email, password})
       // send new auth with the token from the context
