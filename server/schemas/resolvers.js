@@ -1,4 +1,4 @@
-const { User } = require("../models/User")
+const { User } = require("../models")
 const { signToken, AuthenticationError } = require('../utils/auth')
 
 const resolvers = {
@@ -25,13 +25,15 @@ const resolvers = {
       return auth
     },
     addUser: async (parent, {username, email, password}) => {
-      console.log("Adding user")
+      console.log(username)
+      console.log(email)
+      console.log(password)
       // Create new user
       const newUser = await User.create({username, email, password})
       // send new auth with the token from the context
       const jwt = signToken(newUser)
-      const auth = {jwt, newUser}
-      return auth
+      console.log(jwt)
+      return {jwt, newUser}
     },
     saveBook: async (parent, {bookId, authors, description, title, image, link}, context) => {
       if(!context.user) throw AuthenticationError
