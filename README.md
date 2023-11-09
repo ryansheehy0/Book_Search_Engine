@@ -1,66 +1,53 @@
-Google Books API search engine and refactor it to work with GraphQL API with Apollo Server
+# Book Search Engine
 
-1. Set up Apollo Server to use GraphQL
-2. Authentication middleware so it works with GraphQL API
-3. Apollo Provider so requests can work with Apollo Server
-4. Deploy to Heroku
+## Table of Contents
+- [Description](#description)
+- [License](#license)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Credits](#credits)
+	- [Resources](#resources)
+- [Tests](#tests)
+- [Issues/Questions](#issuesquestions)
+- [Contributing](#contributing)
 
-Back end
-  + auth.js
-    + Update the auth middleware function to work with the GraphQL API.
-  + server.js
-    + Implement the Apollo Server and apply it to the Express server as middleware.
-  + Schemas
-    + index.js
-      + Export your typeDefs and resolvers.
-    + resolvers.js
-      + Define the query and mutation functionality to work with the Mongoose models.
-    + typeDefs.js
-      + Define the necessary Query and Mutation types
-        + Query
-          - me: Which returns a User type.
-        + Mutation
-          - login: Accepts an email and password as parameters; returns an Auth type.
-          - addUser: Accepts a username, email, and password as parameters; returns an Auth type.
-          - saveBook: Accepts a book author's array, description, title, bookId, image, and link as parameters; returns a User type. (Look into creating what's known as an input type to handle all of these parameters!)
-          - removeBook: Accepts a book's bookId as a parameter; returns a User type.
+## Description
+A google books api search engine that uses GraphQL under the hood.
 
-Types:
-  + User
-    - _id
-    - username
-    - email
-    - bookCount
-    - savedBooks (This will be an array of the Book type.)
-  + Book
-    - bookId (Not the _id, but the book's id value returned from Google's Book API.)
-    - authors (An array of strings, as there may be more than one author.)
-    - description
-    - title
-    - image
-    - link
-  + Auth
-    - token
-    - user(References the user type.)
+Check out the website [here](https://ryansheehy0-book-search-engine-fa3caa38261a.herokuapp.com/)
 
-Front end:
-  + queries.js
-    + This will hold the query GET_ME, which will execute the me query set up using Apollo Server.
-  + mutations.js
-    + LOGIN_USER will execute the loginUser mutation set up using Apollo Server.
-    + ADD_USER will execute the addUser mutation.
-    - SAVE_BOOK will execute the saveBook mutation
-    + REMOVE_BOOK will execute the removeBook mutation.
-  + App.jsx
-    + Create an Apollo Provider to make every request work with the Apollo server.
-  + SearchBooks.jsx
-    + Use the Apollo useMutation() Hook to execute the SAVE_BOOK mutation in the handleSaveBook() function instead of the saveBook() function imported from the API file.
-    + Make sure you keep the logic for saving the book's ID to state in the try...catch block!
-  + SavedBooks.jsx
-    + Remove the useEffect() Hook that sets the state for UserData.
-    + Instead, use the useQuery() Hook to execute the GET_ME query on load and save it to a variable named userData.
-    + Use the useMutation() Hook to execute the REMOVE_BOOK mutation in the handleDeleteBook() function instead of the deleteBook() function that's imported from API file. (Make sure you keep the removeBookId() function in place!)
-  + SignupForm.jsx
-    + Replace the addUser() functionality imported from the API file with the ADD_USER mutation functionality.
-  + LoginForm.jsx
-    + Replace the loginUser() functionality imported from the API file with the LOGIN_USER mutation functionality.
+## License
+[![MIT License](https://img.shields.io/badge/MIT_License-blue)](https://choosealicense.com/licenses/mit/)
+
+## Installation
+First, clone the repo at `https://github.com/ryansheehy0/Book_Search_Engine`<br><br>Second, run `npm install` which will install all the npm packages.<br><br>Third, run `sudo service mongod start` to start your mondgoDB server locally.<br><br>And finally, run `npm run develop` to launch the app.
+
+## Usage
+Just type books in the search engine and they will pop up with an image, description, and much more information about the book. Sign in or login in in the top right to keep track of your favorite books.
+![screenshot 0](./screenshot.png)
+
+## Credits
+
+### Resources
+- [express](https://www.npmjs.com/package/express)
+- [graphql](https://www.npmjs.com/package/graphql)
+- [@apollo/server](https://www.npmjs.com/package/@apollo/server)
+- [@apollo/client](https://www.npmjs.com/package/@apollo/client)
+- [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
+
+## Tests
+Just [install](#installation) and run the app.
+
+## Issues/Questions
+If you have any problems please specify what the problem is and the exact steps that lead you to your problem.
+
+If you have any questions or issues feel free to reach out to me at
+
+Github: [ryansheehy0](https://github.com/ryansheehy0)
+
+or
+
+Email: ryansheehy0@gmail.com
+
+## Contributing
+To contribute just make a pull request.
